@@ -12,14 +12,14 @@ A wave-based action game where players battle against escalating hordes of monst
 ---
 
 ## Project Status
-- **Main Build**: ![Main Workflow Status](https://github.com/rereversed/set09120-rogues/actions/workflows/main.yml/badge.svg)
-- **Develop Branch**: ![Develop Workflow Status](https://github.com/rereversed/set09120-rogues/actions/workflows/develop.yml/badge.svg)
+- **Main Build**: ![Main Workflow Status](https://github.com/Nathan-Preece/Games-Engineering---SET09121-Project/actions/workflows/main.yml/badge.svg)
+- **Develop Branch**: ![Develop Workflow Status](https://github.com/Nathan-Preece/Games-Engineering---SET09121-Project/actions/workflows/develop.yml/badge.svg)
 
 ## License
 - This project is licensed under [MIT License](LICENSE).
 
 ## Release
-- View the latest releases in the [Releases](https://github.com/rereversed/set09120-rogues/releases) section.
+- View the latest releases in the [Releases](https://github.com/Nathan-Preece/Games-Engineering---SET09121-Project/releases) section.
 
 ---
 
