@@ -1,4 +1,3 @@
-// Enemy.cpp (no changes to the constructor)
 #include "Enemy.hpp"
 #include <iostream>
 
