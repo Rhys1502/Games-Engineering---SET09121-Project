@@ -1,4 +1,3 @@
-#include <SFML/Graphics.hpp>
 #include "Player.hpp"
 #include <iostream>
 
@@ -8,12 +7,11 @@ Player::Player() {
     }
 
     sprite.setTexture(texture);
-    sprite.setScale(5.f, 5.f);  // Scale the player sprite
-
+    sprite.setScale(5.f, 5.f);
     currentFrame = 0;
-    frameSpeed = 0.2f;  // Frame change interval in seconds
-    movementSpeed = 200.f;  // Movement speed
-    updateCollisionBox();  // Update collision box
+    frameSpeed = 0.2f;
+    movementSpeed = 200.f;
+    updateCollisionBox();
 }
 
 void Player::update(sf::Time deltaTime, sf::RenderWindow& window) {
@@ -26,7 +24,7 @@ void Player::update(sf::Time deltaTime, sf::RenderWindow& window) {
         position.x += movementSpeed * deltaTime.asSeconds();
     }
 
-    position.y = sprite.getPosition().y;  // Ensure Y stays fixed
+    position.y = sprite.getPosition().y;
 
     sf::FloatRect playerBounds = sprite.getGlobalBounds();
     sf::Vector2u windowSize = window.getSize();
@@ -48,12 +46,20 @@ void Player::update(sf::Time deltaTime, sf::RenderWindow& window) {
     updateCollisionBox();
 }
 
+void Player::attack(std::vector<Enemy>& enemies) {
+    for (auto& enemy : enemies) {
+        if (sprite.getGlobalBounds().intersects(enemy.getEnemySprite().getGlobalBounds())) {
+            enemy.takeDamage();
+        }
+    }
+}
+
 void Player::updateCollisionBox() {
-    collisionBox = sprite.getGlobalBounds();  // Update the collision box
+    collisionBox = sprite.getGlobalBounds();
 }
 
 void Player::render(sf::RenderWindow& window) {
-    window.draw(sprite);  // Draw player sprite
+    window.draw(sprite);
 }
 
 void Player::setStartPosition(sf::Vector2u windowSize) {

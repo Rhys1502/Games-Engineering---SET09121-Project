@@ -3,8 +3,8 @@
 #include <iostream>
 
 Game::Game() {
-    // Get the desktop resolution
-    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    // Get the desktop resolution and store it in the member variable
+    desktop = sf::VideoMode::getDesktopMode();
 
     // Create the window in fullscreen mode using the desktop resolution
     window.create(desktop, "Rogue Ascent", sf::Style::Fullscreen);
@@ -18,6 +18,18 @@ Game::Game() {
     if (!backgroundTexture.loadFromFile("sprites/background.png")) {
         std::cerr << "Error loading background image" << std::endl;
     }
+
+    if (!enemyTexture.loadFromFile("sprites/enemy.png")) {
+        std::cerr << "Error loading enemy texture!" << std::endl;
+    }
+
+    killText.setFont(font);
+    killText.setCharacterSize(50);  // Adjust the font size as needed
+    killText.setFillColor(sf::Color::White);  // Set the text color
+
+    // Use the member variable `desktop` to set the killText position
+    killText.setPosition(desktop.width / 2 - killText.getLocalBounds().width / 2, 10);
+
     backgroundSprite.setTexture(backgroundTexture);  // Set texture to sprite
 
     // Adjust background to match resolution
@@ -56,21 +68,45 @@ Game::Game() {
         (screenWidth - exitBounds.width) / 2.f,
         (screenHeight - exitBounds.height) / 2.f + 50
     );
+
+    // Initialize clock for spawning enemies
+    spawnClock.restart();
+    spawnInterval = sf::seconds(3);  // Spawn an enemy every 3 seconds
+}
+
+void Game::spawnEnemies(const sf::Texture& enemyTexture) {
+    // Pass the player's position when spawning the enemy
+    enemies.push_back(Enemy(enemyTexture, window.getSize(), player.getPosition()));
 }
 
 void Game::run() {
     sf::Clock clock;
-    player.setStartPosition(window.getSize());  // Call this during initialization
+    player.setStartPosition(window.getSize());
+
     while (window.isOpen()) {
         sf::Time deltaTime = clock.restart();
-
         processEvents();
 
         if (!isPaused) {
-            player.update(deltaTime, window);  // Only update player if not paused
+            player.update(deltaTime, window);
+
+            for (auto it = enemies.begin(); it != enemies.end();) {
+                it->update(deltaTime, player.getPosition());
+                if (!it->isAlive()) {  // Use getter to check if the enemy is alive
+                    it = enemies.erase(it);
+                    killCount++;
+                }
+                else {
+                    ++it;
+                }
+            }
+
+            if (spawnClock.getElapsedTime() >= spawnInterval) {
+                spawnEnemies(enemyTexture);
+                spawnClock.restart();
+            }
         }
 
-        // Render the game and menu
         render();
     }
 }
@@ -104,6 +140,9 @@ void Game::processEvents() {
         else if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Escape) {
                 isPaused = !isPaused;  // Toggle pause state on Escape key press
+            }
+            if (event.key.code == sf::Keyboard::Space) {
+                player.attack(enemies);  // Pass the enemies vector when the player attacks
             }
         }
 
@@ -142,19 +181,33 @@ void Game::processEvents() {
 void Game::render() {
     window.clear();  // Clear the screen before drawing
 
-    // Draw the background first
-    window.draw(backgroundSprite);
+    window.draw(backgroundSprite);  // Draw the background first
 
-    // Render the player
+    // Render the game objects (only if not paused)
     if (!isPaused) {
-        player.render(window);
+        player.render(window);  // Render player
+        for (auto& enemy : enemies) {
+            enemy.render(window);  // Render enemies
+        }
+
+        // Update the kill counter text and center it
+        killText.setString("Kills: " + std::to_string(killCount));
+
+        // Recalculate the position to center the text based on its new content
+        sf::FloatRect killBounds = killText.getLocalBounds();
+        killText.setPosition(
+            desktop.width / 2 - killBounds.width / 2,  // Center horizontally
+            10  // Fixed position for top (you can adjust as needed)
+        );
+
+        window.draw(killText);  // Draw the kill counter text
     }
     else {
+        // Show the pause menu
         showPauseMenu();
     }
 
-    // Display everything that was drawn to the window
-    window.display();
+    window.display();  // Display everything that was drawn to the window
 }
 
 void Game::showPauseMenu() {
