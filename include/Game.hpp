@@ -2,21 +2,29 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
-#include "Player.hpp"
+#include "Player.hpp" // Assuming you have a Player class
 
 class Game {
 public:
-    Game();  // Constructor
-    void run();  // Main game loop
+    Game();
+    void run();
 
 private:
-    void processEvents();  // Process events like key presses
-    void render();  // Render game elements
+    void processEvents();
+    void render();
+    void spawnEnemies(const sf::Texture& enemyTexture);
+    void showPauseMenu();
+    void togglePause();
 
     sf::RenderWindow window;
-    Player player;  // Player object for the game
-    sf::Texture backgroundTexture;
+    sf::Font font;
+    sf::Text resumeText;
+    sf::Text exitText;
     sf::Sprite backgroundSprite;
+    sf::Texture backgroundTexture;
+    bool isPaused = false;
+
+    Player player;  // Assuming you have a Player class
 };
 
-#endif
+#endif // GAME_HPP
