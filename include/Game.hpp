@@ -10,14 +10,13 @@ public:
     void run();  // Main game loop
 
 private:
-    void processEvents();  // Handle events
-    void update(sf::Time deltaTime);  // Update game logic
-    void render();  // Render game objects
+    void processEvents();  // Process events like key presses
+    void render();  // Render game elements
 
-    sf::RenderWindow window;  // Window where everything is drawn
-    Player player;  // Player object
-    sf::Texture backgroundTexture;  // Texture for background
-    sf::Sprite backgroundSprite;  // Sprite for background
+    sf::RenderWindow window;
+    Player player;  // Player object for the game
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
 };
 
 #endif

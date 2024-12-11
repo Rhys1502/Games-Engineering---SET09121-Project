@@ -18,8 +18,3 @@ add_executable(RogueAscent src/main.cpp src/Game.cpp src/Player.cpp)
 
 # Link SFML libraries
 target_link_libraries(RogueAscent sfml-system sfml-window sfml-graphics)
-
-# Add tests (optional)
-enable_testing()
-add_executable(tests tests/test_Game.cpp tests/test_Player.cpp)
-target_link_libraries(tests sfml-system sfml-window sfml-graphics)

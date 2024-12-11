@@ -5,17 +5,38 @@
 
 class Player {
 public:
-    Player();  // Constructor to load the texture and set up the sprite
-    void update(sf::Time deltaTime);  // Update the animation frame
-    void render(sf::RenderWindow& window);  // Render the player sprite
+    // Constructor
+    Player();
+
+    // Update method for handling movement, animation, and collision
+    void update(sf::Time deltaTime, sf::RenderWindow& window);
+
+    // Render method to draw the player on the window
+    void render(sf::RenderWindow& window);
+
+    // Set the starting position of the player based on the window size
+    void setStartPosition(sf::Vector2u windowSize);
 
 private:
-    sf::Texture texture;  // The texture holding the sprite sheet
-    sf::Sprite sprite;    // The sprite to be drawn
-    sf::Clock animationClock;  // To track the time for animation frame updates
-    int currentFrame;  // Track the current frame of the animation
-    float frameSpeed;  // Speed at which the animation frames change
-    float movementSpeed;  // Speed at which the player moves
+    // Sprite representing the player
+    sf::Sprite sprite;
+
+    // Texture for the player sprite
+    sf::Texture texture;
+
+    // Animation variables
+    int currentFrame;
+    float frameSpeed;
+    sf::Clock animationClock;
+
+    // Movement speed
+    float movementSpeed;
+
+    // Collision box for the player
+    sf::FloatRect collisionBox;
+
+    // Update the collision box based on the sprite's position
+    void updateCollisionBox();
 };
 
-#endif
+#endif // PLAYER_HPP
