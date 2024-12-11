@@ -9,7 +9,6 @@ Game::Game() {
     // Create the window in fullscreen mode using the desktop resolution
     window.create(desktop, "Rogue Ascent", sf::Style::Fullscreen);
 
-    // Load font for the menu (make sure you have a font file available)
     if (!font.loadFromFile("fonts/menuFont.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
     }
@@ -24,7 +23,7 @@ Game::Game() {
     }
 
     killText.setFont(font);
-    killText.setCharacterSize(50);  // Adjust the font size as needed
+    killText.setCharacterSize(50); 
     killText.setFillColor(sf::Color::White);  // Set the text color
 
     // Use the member variable `desktop` to set the killText position
@@ -39,7 +38,6 @@ Game::Game() {
         static_cast<float>(window.getSize().y) / textureSize.y
     );
 
-    // Calculate hard-coded center positions
     float screenWidth = static_cast<float>(desktop.width);
     float screenHeight = static_cast<float>(desktop.height);
 
@@ -49,7 +47,6 @@ Game::Game() {
     resumeText.setCharacterSize(50);
     resumeText.setFillColor(sf::Color::White);
 
-    // Hard-coded center position for resume text
     sf::FloatRect resumeBounds = resumeText.getGlobalBounds();
     resumeText.setPosition(
         (screenWidth - resumeBounds.width) / 2.f,
@@ -62,7 +59,6 @@ Game::Game() {
     exitText.setCharacterSize(50);
     exitText.setFillColor(sf::Color::White);
 
-    // Hard-coded center position for exit text
     sf::FloatRect exitBounds = exitText.getGlobalBounds();
     exitText.setPosition(
         (screenWidth - exitBounds.width) / 2.f,
