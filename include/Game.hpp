@@ -3,8 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "Player.hpp"  // Ensure Player.hpp is in the correct path
-#include "Enemy.hpp"   // Ensure Enemy.hpp is in the correct path
+#include "Player.hpp"
+#include "Enemy.hpp"   
 
 class Game {
 public:
