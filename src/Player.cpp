@@ -17,10 +17,10 @@ Player::Player() {
 void Player::update(sf::Time deltaTime, sf::RenderWindow& window) {
     sf::Vector2f position = sprite.getPosition();
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         position.x -= movementSpeed * deltaTime.asSeconds();
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         position.x += movementSpeed * deltaTime.asSeconds();
     }
 

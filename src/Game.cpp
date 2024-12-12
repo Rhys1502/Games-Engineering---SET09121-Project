@@ -137,7 +137,7 @@ void Game::processEvents() {
             if (event.key.code == sf::Keyboard::Escape) {
                 isPaused = !isPaused;  // Toggle pause state on Escape key press
             }
-            if (event.key.code == sf::Keyboard::Space) {
+            if (event.key.code == sf::Keyboard::Q) {
                 player.attack(enemies);  // Pass the enemies vector when the player attacks
             }
         }
@@ -179,7 +179,7 @@ void Game::render() {
 
     window.draw(backgroundSprite);  // Draw the background first
 
-    // Render the game objects (only if not paused)
+    // Render the game objects
     if (!isPaused) {
         player.render(window);  // Render player
         for (auto& enemy : enemies) {
@@ -193,7 +193,7 @@ void Game::render() {
         sf::FloatRect killBounds = killText.getLocalBounds();
         killText.setPosition(
             desktop.width / 2 - killBounds.width / 2,  // Center horizontally
-            10  // Fixed position for top (you can adjust as needed)
+            10
         );
 
         window.draw(killText);  // Draw the kill counter text
