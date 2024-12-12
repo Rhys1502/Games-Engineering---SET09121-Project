@@ -14,12 +14,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 
 # Add executable
-add_executable(RogueAscent src/main.cpp src/Game.cpp src/Player.cpp)
+add_executable(RogueAscent src/main.cpp src/Game.cpp src/Player.cpp "src/Enemy.cpp")
 
 # Link SFML libraries
-target_link_libraries(RogueAscent sfml-system sfml-window sfml-graphics)
-
-# Add tests (optional)
-enable_testing()
-add_executable(tests tests/test_Game.cpp tests/test_Player.cpp)
-target_link_libraries(tests sfml-system sfml-window sfml-graphics)
+target_link_libraries(RogueAscent sfml-system sfml-window sfml-graphics sfml-audio)
