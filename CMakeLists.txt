@@ -17,4 +17,4 @@ find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 add_executable(RogueAscent src/main.cpp src/Game.cpp src/Player.cpp "src/Enemy.cpp")
 
 # Link SFML libraries
-target_link_libraries(RogueAscent sfml-system sfml-window sfml-graphics)
+target_link_libraries(RogueAscent sfml-system sfml-window sfml-graphics sfml-audio)

@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include "Player.hpp"
 #include "Enemy.hpp"   
@@ -20,6 +21,7 @@ private:
     sf::Clock spawnClock;        // Clock for managing spawn time
     sf::Time spawnInterval;      // Interval between enemy spawns
     sf::RenderWindow window;
+    sf::Music music;
     sf::Font font;
     sf::Text resumeText;
     sf::Text exitText;

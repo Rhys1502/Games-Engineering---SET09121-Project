@@ -22,6 +22,10 @@ Game::Game() {
         std::cerr << "Error loading enemy texture!" << std::endl;
     }
 
+    if (!music.openFromFile("sounds/mainMusic.ogg")) {
+        std::cerr << "Error loading music!" << std::endl;
+    }
+
     killText.setFont(font);
     killText.setCharacterSize(50); 
     killText.setFillColor(sf::Color::White);  // Set the text color
@@ -68,6 +72,8 @@ Game::Game() {
     // Initialize clock for spawning enemies
     spawnClock.restart();
     spawnInterval = sf::seconds(3);  // Spawn an enemy every 3 seconds
+
+    music.play();
 }
 
 void Game::spawnEnemies(const sf::Texture& enemyTexture) {
@@ -137,7 +143,7 @@ void Game::processEvents() {
             if (event.key.code == sf::Keyboard::Escape) {
                 isPaused = !isPaused;  // Toggle pause state on Escape key press
             }
-            if (event.key.code == sf::Keyboard::Q) {
+            if (event.key.code == sf::Keyboard::F) {
                 player.attack(enemies);  // Pass the enemies vector when the player attacks
             }
         }

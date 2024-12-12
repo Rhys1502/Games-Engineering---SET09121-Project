@@ -9,6 +9,10 @@ Enemy::Enemy(const sf::Texture& texture, const sf::Vector2u& windowSize, const s
     float yPos = playerPosition.y;
     enemySprite.setPosition(xPos, yPos);
 
+    maxHealth = 5;
+    health = maxHealth;
+    hitsTaken = 0;
+
     animationFrame = sf::IntRect(0, 0, textureWidth, textureHeight);
     enemySprite.setTextureRect(animationFrame);
 }
